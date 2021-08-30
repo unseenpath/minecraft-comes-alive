@@ -15,6 +15,7 @@ public class Memories {
 
     private int dialogueType;
 
+      
     private EntityVillagerMCA villager;
 
     private Memories() {

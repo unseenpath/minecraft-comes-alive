@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import java.lang.reflect.Constructor;
 
 public class CVillagerProfession {
-    @Getter private final VillagerProfession mcProfession;
+    @Getter public final VillagerProfession mcProfession;
     private CVillagerProfession(VillagerProfession profession) {
         this.mcProfession = profession;
     }

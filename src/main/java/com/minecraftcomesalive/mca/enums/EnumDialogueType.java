@@ -25,4 +25,9 @@ public enum EnumDialogueType {
         Optional<EnumDialogueType> state = Arrays.stream(values()).filter((e) -> e.id == idIn).findFirst();
         return state.orElse(UNASSIGNED);
     }
+
+	int getId(int id) {
+		// TODO Auto-generated method stub
+		return id;
+	}
 }

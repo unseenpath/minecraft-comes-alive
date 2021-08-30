@@ -47,10 +47,10 @@ public class CommandMCA {
 
     private static int clearVillagerEditors(CommandContext<CommandSource> ctx) throws CommandSyntaxException {
         PlayerEntity player = ctx.getSource().getPlayerOrException();
-        for (int i = 0; i < player.inventory.mainInventory.size(); i++) {
-            ItemStack stack = player.inventory.mainInventory.get(i);
+        for (int i = 0; i < player.inventory.getContainerSize(); i++) {
+            ItemStack stack = player.inventory.getItem(i);
             if (stack.getItem() == MCA.ITEM_VILLAGER_EDITOR.get()) {
-                player.inventory.mainInventory.set(i, ItemStack.EMPTY);
+                player.inventory.add(i, ItemStack.EMPTY);
             }
         }
         return 0;
@@ -80,7 +80,7 @@ public class CommandMCA {
         PlayerEntity player = ctx.getSource().getPlayerOrException();
         getLoadedVillagers(ctx).forEach(v -> {
             Memories memories = ((EntityVillagerMCA)v).getMemoriesForPlayer(CPlayer.fromMC(player));
-            memories.setHearts(memories.getHearts() - 10);
+            memories.modHearts(-10);
             ((EntityVillagerMCA)v).updateMemories(memories);
         });
         return 0;
@@ -90,7 +90,7 @@ public class CommandMCA {
         PlayerEntity player = ctx.getSource().getPlayerOrException();
         getLoadedVillagers(ctx).forEach(v -> {
             Memories memories = ((EntityVillagerMCA)v).getMemoriesForPlayer(CPlayer.fromMC(player));
-            memories.setHearts(memories.getHearts() + 10);
+            memories.modHearts(+10);
             ((EntityVillagerMCA)v).updateMemories(memories);
         });
         return 0;
@@ -125,7 +125,7 @@ public class CommandMCA {
 
     private static int restoreClearedVillagers(CommandContext<CommandSource> ctx) {
         ServerWorld world = ctx.getSource().getLevel();
-        prevVillagersRemoved.forEach(world::addEntity);
+        prevVillagersRemoved.forEach(world::addFreshEntity);
         prevVillagersRemoved.clear();
         success("Restored cleared villagers.", ctx);
         return 0;

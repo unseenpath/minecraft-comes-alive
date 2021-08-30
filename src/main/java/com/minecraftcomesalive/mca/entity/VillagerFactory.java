@@ -10,6 +10,7 @@ import com.minecraftcomesalive.mca.entity.data.ParentPair;
 import com.minecraftcomesalive.mca.enums.EnumAgeState;
 import com.minecraftcomesalive.mca.enums.EnumGender;
 import net.minecraft.entity.merchant.villager.VillagerData;
+import net.minecraft.world.World;
 
 public class VillagerFactory {
     private final CWorld world;
@@ -24,7 +25,7 @@ public class VillagerFactory {
 
     private VillagerFactory(CWorld world) {
         this.world = world;
-        this.villager = new EntityVillagerMCA(MCA.ENTITYTYPE_VILLAGER.get(), world.getMcWorld());
+        this.villager = new EntityVillagerMCA(MCA.ENTITYTYPE_VILLAGER.get(), World.getMcWorld());
     }
 
     public static VillagerFactory newVillager(CWorld world) {
@@ -39,14 +40,14 @@ public class VillagerFactory {
 
     public VillagerFactory withProfession(CVillagerProfession prof) {
         VillagerData data = villager.getVillagerData();
-        villager.setVillagerData(new VillagerData(data.getType(), prof.getMcProfession(), 0));
+        villager.setVillagerData(new VillagerData(data.getType(), prof.fromMC(this.withProfession(prof, 0))));
         isProfessionSet = true;
         return this;
     }
 
     public VillagerFactory withProfession(CVillagerProfession prof, int level) {
         VillagerData data = villager.getVillagerData();
-        villager.setVillagerData(new VillagerData(data.getType(), prof.getMcProfession(), level));
+        villager.setVillagerData(new VillagerData(data.getType(), prof.fromMC(mcProfession), level));
         isProfessionSet = true;
         isLevelSet = true;
         return this;
