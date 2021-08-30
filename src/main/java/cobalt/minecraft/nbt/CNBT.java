@@ -4,10 +4,8 @@ import cobalt.core.Cobalt;
 import cobalt.minecraft.util.math.CPos;
 import lombok.Getter;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -51,7 +49,7 @@ public class CNBT {
     }
 
     public UUID getUUID(String key) {
-        return mcCompound.getUniqueId(key);
+        return mcCompound.getUUID(key);
     }
 
     public byte getByte(String key) {
@@ -59,7 +57,7 @@ public class CNBT {
     }
 
     public void setUUID(String key, UUID value) {
-        mcCompound.putUniqueId(key, value);
+        mcCompound.putUUID(key, value);
     }
 
     public void setString(String key, String value) {
@@ -148,6 +146,6 @@ public class CNBT {
     }
 
     public Set<String> getKeySet() {
-        return mcCompound.keySet();
+        return mcCompound.getAllKeys();
     }
 }

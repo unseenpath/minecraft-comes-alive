@@ -28,13 +28,13 @@ public class CEntity {
     }
 
     public double getPosX() {
-        return mcEntity.getPosX();
+        return mcEntity.getX();
     }
     public double getPosY() {
-        return mcEntity.getPosY();
+        return mcEntity.getY();
     }
     public double getPosZ() {
-        return mcEntity.getPosZ();
+        return mcEntity.getZ();
     }
 
     public CPos getPosition() {
@@ -42,11 +42,11 @@ public class CEntity {
     }
 
     public void sendMessage(String message) {
-        mcEntity.sendMessage(new StringTextComponent(message));
+        mcEntity.sendMessage(new StringTextComponent(message), getUniqueID());
     }
 
     public boolean attackFrom(DamageSource source, float amount) {
-        return mcEntity.attackEntityFrom(source, amount);
+        return mcEntity.isAttackable();
     }
 
     public String getName() {
@@ -54,7 +54,7 @@ public class CEntity {
     }
 
     public UUID getUniqueID() {
-        return mcEntity.getUniqueID();
+        return mcEntity.getUUID();
     }
 
     public void dropItem(ItemStack stack, float offsetY) {

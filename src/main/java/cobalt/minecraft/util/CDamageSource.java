@@ -21,18 +21,18 @@ public class CDamageSource {
     }
 
     public String getCauseName(LivingEntity entity) {
-        return mcSource.getDeathMessage(entity).getString();
+        return mcSource.getLocalizedDeathMessage(entity).getString();
     }
 
     public Optional<CPlayer> getPlayer() {
-        if (mcSource.getTrueSource() instanceof PlayerEntity) {
-            return Optional.of(CPlayer.fromMC((PlayerEntity)mcSource.getTrueSource()));
+        if (mcSource.getDirectEntity() instanceof PlayerEntity) {
+            return Optional.of(CPlayer.fromMC((PlayerEntity)mcSource.getDirectEntity()));
         } else {
             return Optional.empty();
         }
     }
 
     public boolean isZombie() {
-        return mcSource.getImmediateSource() instanceof ZombieEntity;
+        return mcSource.getDirectEntity() instanceof ZombieEntity;
     }
 }

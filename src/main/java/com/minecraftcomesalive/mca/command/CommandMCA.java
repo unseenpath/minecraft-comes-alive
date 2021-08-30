@@ -46,7 +46,7 @@ public class CommandMCA {
     }
 
     private static int clearVillagerEditors(CommandContext<CommandSource> ctx) throws CommandSyntaxException {
-        PlayerEntity player = ctx.getSource().asPlayer();
+        PlayerEntity player = ctx.getSource().getPlayerOrException();
         for (int i = 0; i < player.inventory.mainInventory.size(); i++) {
             ItemStack stack = player.inventory.mainInventory.get(i);
             if (stack.getItem() == MCA.ITEM_VILLAGER_EDITOR.get()) {
@@ -77,7 +77,7 @@ public class CommandMCA {
     }
 
     private static int decrementHearts(CommandContext<CommandSource> ctx) throws CommandSyntaxException {
-        PlayerEntity player = ctx.getSource().asPlayer();
+        PlayerEntity player = ctx.getSource().getPlayerOrException();
         getLoadedVillagers(ctx).forEach(v -> {
             Memories memories = ((EntityVillagerMCA)v).getMemoriesForPlayer(CPlayer.fromMC(player));
             memories.setHearts(memories.getHearts() - 10);
@@ -87,7 +87,7 @@ public class CommandMCA {
     }
 
     private static int incrementHearts(CommandContext<CommandSource> ctx) throws CommandSyntaxException {
-        PlayerEntity player = ctx.getSource().asPlayer();
+        PlayerEntity player = ctx.getSource().getPlayerOrException();
         getLoadedVillagers(ctx).forEach(v -> {
             Memories memories = ((EntityVillagerMCA)v).getMemoriesForPlayer(CPlayer.fromMC(player));
             memories.setHearts(memories.getHearts() + 10);
@@ -104,8 +104,8 @@ public class CommandMCA {
     }
 
     private static int forceBabyGrowth(CommandContext<CommandSource> ctx) throws CommandSyntaxException {
-        PlayerEntity player = ctx.getSource().asPlayer();
-        ItemStack heldStack = player.getHeldItem(Hand.MAIN_HAND);
+        PlayerEntity player = ctx.getSource().getPlayerOrException();
+        ItemStack heldStack = player.getMainHandItem();
 
         if (heldStack.getItem() instanceof ItemBaby) {
             ((ItemBaby)heldStack.getItem()).forceAgeUp();
@@ -114,7 +114,7 @@ public class CommandMCA {
     }
 
     private static int forceFullHearts(CommandContext<CommandSource> ctx) throws CommandSyntaxException {
-        PlayerEntity player = ctx.getSource().asPlayer();
+        PlayerEntity player = ctx.getSource().getPlayerOrException();
         getLoadedVillagers(ctx).forEach(v -> {
             Memories memories = ((EntityVillagerMCA)v).getMemoriesForPlayer(CPlayer.fromMC(player));
             memories.setHearts(100);
@@ -124,7 +124,7 @@ public class CommandMCA {
     }
 
     private static int restoreClearedVillagers(CommandContext<CommandSource> ctx) {
-        ServerWorld world = ctx.getSource().getWorld();
+        ServerWorld world = ctx.getSource().getLevel();
         prevVillagersRemoved.forEach(world::addEntity);
         prevVillagersRemoved.clear();
         success("Restored cleared villagers.", ctx);
@@ -132,7 +132,7 @@ public class CommandMCA {
     }
 
     private static ArgumentBuilder<CommandSource, ?> register(String name, Command<CommandSource> cmd) {
-        return Commands.literal(name).requires(cs -> cs.hasPermissionLevel(0)).executes(cmd);
+        return Commands.literal(name).requires(cs -> cs.hasPermission(0)).executes(cmd);
     }
 
     private static int clearLoadedVillagers(final CommandContext<CommandSource> ctx) {
@@ -147,14 +147,14 @@ public class CommandMCA {
     }
 
     private static Stream<Entity> getLoadedVillagers(final CommandContext<CommandSource> ctx) {
-        return ctx.getSource().getWorld().getEntities().filter(e -> e instanceof EntityVillagerMCA);
+        return ctx.getSource().getLevel().getEntities().filter(e -> e instanceof EntityVillagerMCA);
     }
 
     private static void success(String message, CommandContext<CommandSource> ctx) {
-        ctx.getSource().sendFeedback(new StringTextComponent(CText.Color.GREEN + message), true);
+        ctx.getSource().sendSuccess(new StringTextComponent(CText.Color.GREEN + message), true);
     }
 
     private static void fail(String message, CommandContext<CommandSource> ctx) {
-        ctx.getSource().sendErrorMessage(new StringTextComponent(CText.Color.RED + message));
+        ctx.getSource().sendFailure(new StringTextComponent(CText.Color.RED + message));
     }
 }

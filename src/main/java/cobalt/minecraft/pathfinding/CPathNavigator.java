@@ -16,6 +16,6 @@ public class CPathNavigator {
     }
 
     public boolean tryGoTo(CPos pos) {
-        return vanillaNavigator.tryMoveToXYZ(pos.getX(), pos.getY(), pos.getZ(), 0.5F); //TODO verify
+        return vanillaNavigator.moveTo(pos.getX(), pos.getY(), pos.getZ(), 0.5F); //TODO verify
     }
 }

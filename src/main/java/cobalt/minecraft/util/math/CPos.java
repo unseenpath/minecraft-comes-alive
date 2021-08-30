@@ -44,11 +44,11 @@ public class CPos {
     }
 
     public double getDistance(int x, int y, int z) {
-        return Math.sqrt(mcPos.distanceSq(x, y, z, false));
+        return Math.sqrt(mcPos.distSqr(x, y, z, false));
     }
 
     public CPos down() {
-        mcPos = mcPos.down();
+        mcPos = mcPos.below();
         return this;
     }
 }

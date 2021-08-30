@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class SkinsGroup {
     private final String gender;
-    @Getter private final String profession;
+    private final String profession;
     @Getter private final String[] paths;
 
     public EnumGender getGender() {
