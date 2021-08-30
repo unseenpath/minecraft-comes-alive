@@ -1,6 +1,9 @@
 package com.minecraftcomesalive.mca.core;
 
 import cobalt.items.CItemBasic;
+
+import java.security.acl.Group;
+
 import com.minecraftcomesalive.mca.api.API;
 import com.minecraftcomesalive.mca.client.render.RenderVillagerMCA;
 import com.minecraftcomesalive.mca.command.CommandMCA;
@@ -55,11 +58,11 @@ public class MCA extends CobaltForgeMod {
     public void registerContent() {
         ITEM_MALE_EGG = registerItem("egg_male", new ItemSpawnEgg(EnumGender.MALE, new Item.Properties().tab(TAB)));
         ITEM_FEMALE_EGG = registerItem("egg_female", new ItemSpawnEgg(EnumGender.FEMALE, new Item.Properties().tab(TAB)));
-        ITEM_WEDDING_RING = registerItem("wedding_ring", new CItemBasic(new Item.Properties().tab(TAB).maxStackSize(1)));
-        ITEM_WEDDING_RING_RG = registerItem("wedding_ring_rg", new CItemBasic(new Item.Properties().tab(TAB).maxStackSize(1)));
-        ITEM_ENGAGEMENT_RING = registerItem("engagement_ring", new CItemBasic(new Item.Properties().tab(TAB).maxStackSize(1)));
-        ITEM_ENGAGEMENT_RING_RG = registerItem("engagement_ring_rg", new CItemBasic(new Item.Properties().tab(TAB).maxStackSize(1)));
-        ITEM_MATCHMAKERS_RING = registerItem("matchmakers_ring", new CItemBasic(new Item.Properties().tab(TAB).maxStackSize(2)));
+        ITEM_WEDDING_RING = registerItem("wedding_ring", new CItemBasic(new Item.Properties().tab(TAB).stacksTo(1)));
+        ITEM_WEDDING_RING_RG = registerItem("wedding_ring_rg", new CItemBasic(new Item.Properties().tab(TAB).stacksTo(1)));
+        ITEM_ENGAGEMENT_RING = registerItem("engagement_ring", new CItemBasic(new Item.Properties().tab(TAB).stacksTo(1)));
+        ITEM_ENGAGEMENT_RING_RG = registerItem("engagement_ring_rg", new CItemBasic(new Item.Properties().tab(TAB).stacksTo(1)));
+        ITEM_MATCHMAKERS_RING = registerItem("matchmakers_ring", new CItemBasic(new Item.Properties().tab(TAB).stacksTo(2)));
         ITEM_BABY_BOY = registerItem("baby_boy", new ItemBaby(new Item.Properties().tab(TAB)));
         ITEM_BABY_GIRL = registerItem("baby_girl", new ItemBaby(new Item.Properties().tab(TAB)));
         ITEM_ROSE_GOLD_INGOT = registerItem("rose_gold_ingot", new CItemBasic(new Item.Properties().tab(TAB)));
@@ -105,12 +108,17 @@ public class MCA extends CobaltForgeMod {
         return "";
     }
 
-    public static final ItemGroup TAB = new ItemGroup("mcaTab") {
+    public static class MCA extends ItemGroup {
+    	public MCA(String label) {
+    		super("mcaTab");
+    	}
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ITEM_ENGAGEMENT_RING.get());
+            return ItemStack(ITEM_ENGAGEMENT_RING.get().getDefaultInstance());
         }
-    };
+    	
+    }
+
 
     public static RegistryObject<Item> ITEM_MALE_EGG;
     public static RegistryObject<Item> ITEM_FEMALE_EGG;

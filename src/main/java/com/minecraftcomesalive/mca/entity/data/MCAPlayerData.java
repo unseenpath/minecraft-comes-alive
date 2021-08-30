@@ -44,23 +44,23 @@ public class MCAPlayerData extends CWorldSavedData {
     public void marry(UUID uuid, String name) {
         spouseUUID = uuid;
         spouseName = name;
-        markDirty();
+        setDirty();
     }
 
     public void endMarriage() {
         spouseUUID = CConstants.ZERO_UUID;
         spouseName = "";
-        markDirty();
+        setDirty();
     }
 
     public void setBabyPresent(boolean value) {
         this.babyPresent = value;
-        markDirty();
+        setDirty();
     }
 
     public void reset() {
         endMarriage();
         setBabyPresent(false);
-        markDirty();
+        setDirty();
     }
 }

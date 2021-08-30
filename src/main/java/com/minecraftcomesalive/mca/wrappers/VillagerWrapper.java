@@ -112,12 +112,12 @@ public abstract class VillagerWrapper extends VillagerEntity {
 
     @Override
     public final ItemStack getItemStackFromSlot(EquipmentSlotType type) {
-        return getEquipmentOfType(CEquipmentSlotType.fromMC(type)).getMcItemStack();
+        return getEquipmentOfType(CEquipmentSlotType.fromMC(type)).getItem().getDefaultInstance().getStack();
     }
 
     @Override
     public final SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_PLAYER_DEATH;
+        return SoundEvents.PLAYER_DEATH;
     }
 
     @Override public final void onDeath(DamageSource source) {
