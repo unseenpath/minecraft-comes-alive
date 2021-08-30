@@ -18,7 +18,7 @@ public abstract class CWorldSavedData extends WorldSavedData {
     }
 
     @Override public CompoundNBT write(CompoundNBT compound) {
-        return save(CNBT.fromMC(compound)).getMcCompound();
+        return save(CNBT.fromMC(compound)).getNBTCompound();
     }
 
     public abstract CNBT save(CNBT cnbt);

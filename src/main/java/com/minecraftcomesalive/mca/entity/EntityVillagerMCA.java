@@ -215,7 +215,7 @@ public class EntityVillagerMCA extends VillagerWrapper implements IEntityAdditio
         if (getHomePos().equals(CPos.ORIGIN)) {
             say(player, "interaction.gohome.fail");
         } else {
-            CPathNavigator nav = CPathNavigator.fromMC(this.getNavigator());
+            CPathNavigator nav = CPathNavigator.fromMC(this.getNavigation());
             if (!nav.tryGoTo(getHomePos())) {
                 attemptTeleport(getHomePos().getX(), getHomePos().getY(), getHomePos().getZ(), false);
             }
@@ -242,10 +242,10 @@ public class EntityVillagerMCA extends VillagerWrapper implements IEntityAdditio
         // Player is always first in params passed to localizer for say().
         paramList.add(0, target.getName());
 
-        String chatPrefix = Config.villagerChatPrefix + getDisplayName().getFormattedText() + ": ";
+        String chatPrefix = Config.villagerChatPrefix + getDisplayName().getStyle() + ": ";
         if (getIsInfected()) { // Infected villagers do not speak
             target.sendMessage(chatPrefix + "???");
-            playSound(SoundEvents.ENTITY_ZOMBIE_AMBIENT, this.getSoundVolume(), this.getSoundPitch());
+            playSound(SoundEvents.ZOMBIE_AMBIENT, this.getSoundVolume(), this.getAmbientSound());
         } else {
             EnumDialogueType dialogueType = getMemoriesForPlayer(target).getDialogueType();
             target.sendMessage(chatPrefix + MCA.localize(dialogueType + "." + phraseId, params));

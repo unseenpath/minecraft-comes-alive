@@ -14,13 +14,13 @@ import java.util.NoSuchElementException;
 public class RideHorseInteraction implements IInteraction {
     @Override
     public void run(EntityVillagerMCA villager, Memories memories, CPlayer player) {
-        if (villager.getRidingEntity() != null) {
+        if (villager.canRiderInteract() != false) {
             villager.stopRiding();
         } else {
             try {
                 List<HorseEntity> horses = villager.world.getEntities(HorseEntity.class, h -> (h.isHorseSaddled() && !h.isBeingRidden() && h.getDistance(this) < 3.0D));
                 villager.startRiding(horses.stream().min(Comparator.comparingDouble(villager::getDistance)).get(), true);
-                villager.getNavigator().clearPath();
+                villager.getNavigation().recomputePath();
             } catch (NoSuchElementException e) {
                 villager.say(player, "interaction.ridehorse.fail.notnearby");
             }

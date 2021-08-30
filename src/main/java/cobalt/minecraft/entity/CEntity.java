@@ -1,6 +1,5 @@
 package cobalt.minecraft.entity;
 
-import cobalt.enums.CEnumHand;
 import cobalt.minecraft.entity.player.CPlayer;
 import cobalt.minecraft.util.math.CPos;
 import cobalt.minecraft.world.CWorld;
@@ -20,7 +19,7 @@ public class CEntity {
 
     protected CEntity(Entity entity) {
         this.mcEntity = entity;
-        this.world = entity != null ? CWorld.fromMC(entity.world) : null;
+        this.world = entity != null ? CWorld.fromMC(entity.level) : null;
     }
 
     public static CEntity fromMC(Entity entity) {
@@ -58,7 +57,7 @@ public class CEntity {
     }
 
     public void dropItem(ItemStack stack, float offsetY) {
-        mcEntity.entityDropItem(stack, offsetY);
+        mcEntity.spawnAtLocation(stack, offsetY);
     }
 
     public boolean isPlayer() {

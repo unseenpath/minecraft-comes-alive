@@ -45,7 +45,7 @@ public class ParentPair {
     public static ParentPair fromVillager(EntityVillagerMCA villager) {
         ParentPair data = new ParentPair();
         data.parent1Name = villager.getVillagerName();
-        data.parent1UUID = villager.getUniqueID();
+        data.parent1UUID = villager.getUUID();
         data.parent2Name = villager.getSpouseName();
         data.parent2UUID = villager.getSpouseUUID();
         return data;
@@ -100,8 +100,8 @@ public class ParentPair {
      * @return CEntity[]
      */
     public CEntity[] getBothParentEntities(CWorld world) {
-        Optional<CEntity> parent1 = getParentEntity(world, getParent1UUID());
-        Optional<CEntity> parent2 = getParentEntity(world, getParent2UUID());
+        Optional<CEntity> parent1 = getParentEntity(world, parent1UUID);
+        Optional<CEntity> parent2 = getParentEntity(world, parent2UUID);
         return new CEntity[] {
                 parent1.orElse(null), parent2.orElse(null)
         };

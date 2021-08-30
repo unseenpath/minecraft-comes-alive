@@ -13,7 +13,6 @@ import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.util.StringUtils;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
-
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,9 +62,9 @@ public class API {
         Gift[] gifts = API.readResourceAsJSON("api/gifts.json", Gift[].class);
         for (Gift gift : gifts) {
             if (!gift.exists()) {
-                MCA.log("Could not find gift item or block in registry: " + gift.getName());
+                MCA.log("Could not find gift item or block in registry: " + gift.getClass().getName());
             } else {
-                giftMap.put(gift.getName(), gift);
+                giftMap.put(gift.getClass().getName(), gift);
             }
         }
     }
@@ -103,7 +102,7 @@ public class API {
                 .filter(g -> g.getGender() == gender && profession.getRegistryName() != null && g.getProfession().equals(profession.getRegistryName().toString()))
                 .findFirst();
 
-        return group.map(g -> g.getPaths()[rng.nextInt(g.getPaths().length - 1)]).orElseGet(() -> {
+        return group.map(g -> g.getPaths()[random.nextInt(g.getPaths().length - 1)]).orElseGet(() -> {
             MCA.log("No skin found for profession: `" + profession.getRegistryName() + "`. A random skin will be generated.");
             SkinsGroup randomGroup = null;
             while (randomGroup == null || randomGroup.getGender() != gender) {

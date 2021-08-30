@@ -5,6 +5,7 @@ import cobalt.minecraft.nbt.CNBT;
 import cobalt.minecraft.world.CWorld;
 import com.minecraftcomesalive.mca.entity.EntityVillagerMCA;
 import lombok.Getter;
+import net.minecraft.nbt.CompoundNBT;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,13 +29,13 @@ public class SavedVillagers extends CWorldSavedData {
     }
 
     public void saveVillager(EntityVillagerMCA villager) {
-        villagerData.put(villager.getUniqueID().toString(), villager.getVillagerParams());
-        markDirty();
+        villagerData.put(villager.getUUID().toString(), villager.getVillagerParams());
+        setDirty();
     }
 
     public void removeVillager(UUID uuid) {
         villagerData.remove(uuid.toString());
-        markDirty();
+        setDirty();
     }
 
     public CNBT getVillagerByUUID(UUID uuid) {
@@ -51,4 +52,5 @@ public class SavedVillagers extends CWorldSavedData {
     public void load(CNBT nbt) {
         nbt.getKeySet().forEach((k) -> villagerData.put(k, nbt.getCompoundTag(k)));
     }
+
 }
