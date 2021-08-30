@@ -1,0 +1,11 @@
+
+{
+  "required": true,
+  "package": "minecraftcomesalive.mca.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "mca.refmap.json",
+  "mixins": [
+
+  ],
+  "minVersion": "0.8"
+}
