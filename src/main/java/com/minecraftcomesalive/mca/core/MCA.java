@@ -53,32 +53,32 @@ public class MCA extends CobaltForgeMod {
 
     @Override
     public void registerContent() {
-        ITEM_MALE_EGG = registerItem("egg_male", new ItemSpawnEgg(EnumGender.MALE, new Item.Properties().group(TAB)));
-        ITEM_FEMALE_EGG = registerItem("egg_female", new ItemSpawnEgg(EnumGender.FEMALE, new Item.Properties().group(TAB)));
-        ITEM_WEDDING_RING = registerItem("wedding_ring", new CItemBasic(new Item.Properties().group(TAB).maxStackSize(1)));
-        ITEM_WEDDING_RING_RG = registerItem("wedding_ring_rg", new CItemBasic(new Item.Properties().group(TAB).maxStackSize(1)));
-        ITEM_ENGAGEMENT_RING = registerItem("engagement_ring", new CItemBasic(new Item.Properties().group(TAB).maxStackSize(1)));
-        ITEM_ENGAGEMENT_RING_RG = registerItem("engagement_ring_rg", new CItemBasic(new Item.Properties().group(TAB).maxStackSize(1)));
-        ITEM_MATCHMAKERS_RING = registerItem("matchmakers_ring", new CItemBasic(new Item.Properties().group(TAB).maxStackSize(2)));
-        ITEM_BABY_BOY = registerItem("baby_boy", new ItemBaby(new Item.Properties().group(TAB)));
-        ITEM_BABY_GIRL = registerItem("baby_girl", new ItemBaby(new Item.Properties().group(TAB)));
-        ITEM_ROSE_GOLD_INGOT = registerItem("rose_gold_ingot", new CItemBasic(new Item.Properties().group(TAB)));
-        ITEM_ROSE_GOLD_DUST = registerItem("rose_gold_dust", new CItemBasic(new Item.Properties().group(TAB)));
-        ITEM_GOLD_DUST = registerItem("gold_dust", new CItemBasic(new Item.Properties().group(TAB)));
-        ITEM_VILLAGER_EDITOR = registerItem("villager_editor", new CItemBasic(new Item.Properties().group(TAB)));
-        ITEM_STAFF_OF_LIFE = registerItem("staff_of_life", new ItemStaffOfLife(new Item.Properties().group(TAB)));
-        ITEM_WHISTLE = registerItem("whistle", new ItemWhistle(new Item.Properties().group(TAB)));
-        ITEM_BOOK_DEATH = registerItem("book_death", new CItemBasic(new Item.Properties().group(TAB)));
-        ITEM_BOOK_ROMANCE = registerItem("book_romance", new CItemBasic(new Item.Properties().group(TAB)));
-        ITEM_BOOK_FAMILY = registerItem("book_family", new CItemBasic(new Item.Properties().group(TAB)));
-        ITEM_BOOK_ROSE_GOLD = registerItem("book_rose_gold", new CItemBasic(new Item.Properties().group(TAB)));
-        ITEM_BOOK_INFECTION = registerItem("book_infection", new CItemBasic(new Item.Properties().group(TAB)));
+        ITEM_MALE_EGG = registerItem("egg_male", new ItemSpawnEgg(EnumGender.MALE, new Item.Properties().tab(TAB)));
+        ITEM_FEMALE_EGG = registerItem("egg_female", new ItemSpawnEgg(EnumGender.FEMALE, new Item.Properties().tab(TAB)));
+        ITEM_WEDDING_RING = registerItem("wedding_ring", new CItemBasic(new Item.Properties().tab(TAB).maxStackSize(1)));
+        ITEM_WEDDING_RING_RG = registerItem("wedding_ring_rg", new CItemBasic(new Item.Properties().tab(TAB).maxStackSize(1)));
+        ITEM_ENGAGEMENT_RING = registerItem("engagement_ring", new CItemBasic(new Item.Properties().tab(TAB).maxStackSize(1)));
+        ITEM_ENGAGEMENT_RING_RG = registerItem("engagement_ring_rg", new CItemBasic(new Item.Properties().tab(TAB).maxStackSize(1)));
+        ITEM_MATCHMAKERS_RING = registerItem("matchmakers_ring", new CItemBasic(new Item.Properties().tab(TAB).maxStackSize(2)));
+        ITEM_BABY_BOY = registerItem("baby_boy", new ItemBaby(new Item.Properties().tab(TAB)));
+        ITEM_BABY_GIRL = registerItem("baby_girl", new ItemBaby(new Item.Properties().tab(TAB)));
+        ITEM_ROSE_GOLD_INGOT = registerItem("rose_gold_ingot", new CItemBasic(new Item.Properties().tab(TAB)));
+        ITEM_ROSE_GOLD_DUST = registerItem("rose_gold_dust", new CItemBasic(new Item.Properties().tab(TAB)));
+        ITEM_GOLD_DUST = registerItem("gold_dust", new CItemBasic(new Item.Properties().tab(TAB)));
+        ITEM_VILLAGER_EDITOR = registerItem("villager_editor", new CItemBasic(new Item.Properties().tab(TAB)));
+        ITEM_STAFF_OF_LIFE = registerItem("staff_of_life", new ItemStaffOfLife(new Item.Properties().tab(TAB)));
+        ITEM_WHISTLE = registerItem("whistle", new ItemWhistle(new Item.Properties().tab(TAB)));
+        ITEM_BOOK_DEATH = registerItem("book_death", new CItemBasic(new Item.Properties().tab(TAB)));
+        ITEM_BOOK_ROMANCE = registerItem("book_romance", new CItemBasic(new Item.Properties().tab(TAB)));
+        ITEM_BOOK_FAMILY = registerItem("book_family", new CItemBasic(new Item.Properties().tab(TAB)));
+        ITEM_BOOK_ROSE_GOLD = registerItem("book_rose_gold", new CItemBasic(new Item.Properties().tab(TAB)));
+        ITEM_BOOK_INFECTION = registerItem("book_infection", new CItemBasic(new Item.Properties().tab(TAB)));
 
         ENTITYTYPE_VILLAGER = registerEntity(EntityVillagerMCA::new, RenderVillagerMCA::new, EntityClassification.AMBIENT,"villager_mca",
                 1.0F, 1.85F);
 
-        PROFESSION_GUARD = registerProfession("guard", PointOfInterestType.ARMORER, SoundEvents.ENTITY_VILLAGER_WORK_ARMORER);
-        PROFESSION_CHILD = registerProfession("child", PointOfInterestType.HOME, SoundEvents.ENTITY_VILLAGER_WORK_FARMER);
+        PROFESSION_GUARD = registerProfession("guard", PointOfInterestType.ARMORER, SoundEvents.VILLAGER_WORK_ARMORER);
+        PROFESSION_CHILD = registerProfession("child", PointOfInterestType.HOME, SoundEvents.VILLAGER_WORK_FARMER);
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.minecraftcomesalive.mca.entity.data.Memories;
 public abstract class AbstractBaseInteraction implements IInteraction {
     @Override
     public final void run(EntityVillagerMCA villager, Memories memories, CPlayer player) {
-        boolean succeeded = villager.getRNG().nextFloat() < getSuccessChance(memories);
+        boolean succeeded = villager.getRandom().nextFloat() < getSuccessChance(memories);
         memories.modHearts(succeeded ? getHeartsModifier() : getHeartsModifier() * -1);
         memories.modInteractionFatigue(1);
 
